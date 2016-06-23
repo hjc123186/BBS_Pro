@@ -25,4 +25,4 @@ class BBS_user(models.Model):
     photo = models.ImageField("uplooad_img/",default='upload_img/user-1.jpg')
 
     def __unicode__(self):
-        return self.user
+        return self.user.username
