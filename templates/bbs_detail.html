@@ -6,12 +6,65 @@
 </head>
 {#<body>#}
 {%  extends 'index.html' %}
+{% load comments %}
+
 {% block page-content %}
+<div class="jumbotron">
 
-{{ bbs_obj.title }}
+<h3> {{ bbs_obj.title }} </h3>
 <br>
-{{ bbs_obj.content }}
 
-{% endblock %} #}
+{{ bbs_obj.content }}
+<br>
+
+<div>
+    {%  get_comment_count for bbs_obj as comment_count %}
+    <span class="glyphicon glyphicon-comment">
+        {{ comment_count }}
+    </span>
+
+</div>
+
+<br>
+{#{%  get_comment_form for bbs_obj as form %}#}
+{#<form action="{% comment_form_target %}" method="POST">#}
+{#    {% csrf_token %}#}
+{##}
+{#    {{ form.comment }}#}
+{#    {{ form.honeypot }}#}
+{#    {{ form.content_type }}#}
+{#    {{ form.object_pk }}#}
+{#    {{ form.timestamp }}#}
+{#    {{ form.security_hash }}#}
+{##}
+{#    <input type="hidden" name="next" value="detail/{{ bbs_obj.id }}" />#}
+{#    <input type="submit" value="Add comment" />#}
+{#    <input type="submit" value="Add comment" id="id_submit" />#}
+{##}
+{#</form>#}
+
+<form action="/sub_comment/" method="POST">
+    {% csrf_token %}
+    <textarea name="comment_content" cols="80" rows="5" > </textarea><br>
+    <input type="hidden" name="next" value="detail/{{ bbs_obj.id }}" />
+    <input type="submit" value="Add comment" />
+
+</form>
+
+<hr>
+{%  get_comment_list for bbs_obj as comment_list %}
+    {%  for comment in comment_list reversed %}
+        {{ comment.submit_date }}
+        <br>
+        {{ comment.comment }}
+        <hr>
+    {% endfor %}
+{#{% render_comment_list for bbs_obj %}#}
+
+</div>
+
+{% endblock %}
+
+
 {#</body>#}
 </html>
