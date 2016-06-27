@@ -46,7 +46,8 @@
 <form action="/sub_comment/" method="POST">
     {% csrf_token %}
     <textarea name="comment_content" cols="80" rows="5" > </textarea><br>
-    <input type="hidden" name="next" value="detail/{{ bbs_obj.id }}" />
+{#    <textarea name="comment" cols="80" rows="5" > </textarea><br>#}
+    <input type="hidden" name="bbs_id" value="{{ bbs_obj.id }}" />
     <input type="submit" value="Add comment" />
 
 </form>

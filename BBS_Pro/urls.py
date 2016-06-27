@@ -22,6 +22,6 @@ urlpatterns = [
     url(r'^admin/', admin.site.urls),
     url(r'',include(app01.urls)),
     url(r'^comments/',include(django_comments.urls)),
-    url(r'accounts/Login/$','app01.views.login'),
-    url(r'accounts/Logout/$','app01.views.logout'),
+    url(r'accounts/Login/$','app01.views.login_view'),
+    url(r'accounts/Logout/$','app01.views.logout_view'),
 ]
