@@ -48,14 +48,14 @@
     <textarea name="comment_content" cols="80" rows="5" > </textarea><br>
 {#    <textarea name="comment" cols="80" rows="5" > </textarea><br>#}
     <input type="hidden" name="bbs_id" value="{{ bbs_obj.id }}" />
-    <input type="submit" value="Add comment" />
+    <input type="submit" value="评论" />
 
 </form>
 
 <hr>
 {%  get_comment_list for bbs_obj as comment_list %}
     {%  for comment in comment_list reversed %}
-        {{ comment.submit_date }}
+        {{ comment.user }}---{{ comment.submit_date }}
         <br>
         {{ comment.comment }}
         <hr>
