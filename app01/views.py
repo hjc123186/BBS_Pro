@@ -36,9 +36,27 @@ def sub_comment(request):
             site_id = 1,
             user = request.user,
             comment = comment,
-
         )
     return HttpResponseRedirect('/detail/%s' % bbs_id)
+
+
+def bbs_pub(request):
+    return render_to_response('bbs_pub.html')
+
+@csrf_exempt
+def bbs_sub(request):
+    print ',===>',request.POST.get('content')
+    content = request.POST.get('content')
+    author = models.BBS_user.objects.get(user__username=request.user)
+    models.BBS.objects.create(
+        title = 'TEST TITLE',
+        summary = "HAHA",
+        content = content,
+        author = author,
+        view_count = 1,
+        ranking = 1,
+    )
+    return HttpResponse("yes.")
 
 @csrf_exempt
 def login_view(request):
