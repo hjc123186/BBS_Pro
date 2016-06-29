@@ -40,6 +40,7 @@ INSTALLED_APPS = [
     'django.contrib.sites',
     'django_comments',
     'app01',
+    'login',
     # 'django_admin_bootstrapped',
 
 ]

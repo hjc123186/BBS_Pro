@@ -64,7 +64,7 @@ def sub_comment(request):
 
 @login_required()
 def bbs_pub(request):
-    return render_to_response('bbs_pub.html')
+    return render_to_response('bbs_pub.html',{'user':request.user,})
 
 @login_required()
 @csrf_exempt
@@ -82,20 +82,20 @@ def bbs_sub(request):
     )
     return HttpResponse("yes.")
 
-@csrf_exempt
-def login_view(request):
-    # print '--->:',request.POST
-    if request.method=="POST":
-        username = request.POST.get('username')
-        password = request.POST.get('password')
-        user = authenticate(username=username,password=password)
-        if user and user.is_active:
-            login(request,user)
-            return HttpResponseRedirect('/index.html')
-    return render_to_response('login.html')
+# @csrf_exempt
+# def login_view(request):
+#     # print '--->:',request.POST
+#     if request.method=="POST":
+#         username = request.POST.get('username')
+#         password = request.POST.get('password')
+#         user = authenticate(username=username,password=password)
+#         if user and user.is_active:
+#             login(request,user)
+#             return HttpResponseRedirect('/index.html')
+#     return render_to_response('login.html')
 
-@login_required()
-@csrf_exempt
-def logout_view(request):
-    logout(request)
-    return HttpResponseRedirect('/accounts/Login/')
+# @login_required()
+# @csrf_exempt
+# def logout_view(request):
+#     logout(request)
+#     return HttpResponseRedirect('/accounts/Login/')

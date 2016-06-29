@@ -10,5 +10,4 @@ urlpatterns = [
     url(r'bbs_pub/$',views.bbs_pub),
     url(r'bbs_sub/$',views.bbs_sub),
     url(r'category/(\d+)/$',views.category),
-
 ]

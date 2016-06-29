@@ -4,28 +4,28 @@ from django import forms
 class LoginForm(forms.Form):
     username = forms.CharField(
         required=True,
-        label="ÓÃ»§Ãû",
-        error_messages={'required':"ÇëÊäÈëÓÃ»§Ãû"},
+        label="ç”¨æˆ·å",
+        error_messages={'required':"ç”¨æˆ·åä¸èƒ½ä¸ºç©º"},
         widget=forms.TextInput(
             attrs={
-                'placeholder':'ÓÃ»§Ãû',
+                'placeholder':'è¾“å…¥ç”¨æˆ·å',
             }
         ),
     )
     password = forms.CharField(
         required=True,
-        label='ÃÜÂë',
-        error_messages={'required':"ÇëÊäÈëÃÜÂë"},
+        label='å¯†ç ',
+        error_messages={'required':"å¯†ç ä¸èƒ½ä¸ºç©º"},
         widget=forms.PasswordInput(
             attrs={
-                'placeholder':'ÃÜÂë',
+                'placeholder':'è¾“å…¥å¯†ç ',
             }
         ),
     )
 
     # def clean(self):
     #     if not self.is_valid():
-    #         raise forms.ValidationError("ÓÃ»§ºÍÃÜÂë²»ÄÜÎª¿Õ")
+    #         raise forms.ValidationError("ï¿½Ã»ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ë²»ï¿½ï¿½Îªï¿½ï¿½")
     #     else:
     #         cleaned_data = super(LoginForm,self).clean()
 
