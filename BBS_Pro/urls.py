@@ -17,11 +17,13 @@ from django.conf.urls import url,include
 from django.contrib import admin
 import app01.urls
 import django_comments.urls
+from login.views import login_view
 
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
     url(r'',include(app01.urls)),
     url(r'^comments/',include(django_comments.urls)),
-    url(r'accounts/Login/$','app01.views.login_view'),
+    # url(r'accounts/Login/$','app01.views.login_view'),
+    url(r'accounts/Login/$',login_view),
     url(r'accounts/Logout/$','app01.views.logout_view'),
 ]

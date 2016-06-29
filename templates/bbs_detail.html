@@ -43,14 +43,20 @@
 {##}
 {#</form>#}
 
-<form action="/sub_comment/" method="POST">
-    {% csrf_token %}
-    <textarea name="comment_content" cols="80" rows="5" > </textarea><br>
-{#    <textarea name="comment" cols="80" rows="5" > </textarea><br>#}
-    <input type="hidden" name="bbs_id" value="{{ bbs_obj.id }}" />
-    <input type="submit" value="评论" />
+{% if user.is_authenticated %}
 
-</form>
+    <form action="/sub_comment/" method="POST">
+        {% csrf_token %}
+        <textarea name="comment_content" cols="80" rows="5" > </textarea><br>
+    {#    <textarea name="comment" cols="80" rows="5" > </textarea><br>#}
+        <input type="hidden" name="bbs_id" value="{{ bbs_obj.id }}" />
+        <input type="submit" value="评论" />
+
+    </form>
+{% else %}
+
+    <p>请<a href="/accounts/Login/"> 登陆 </a>后评论。</p>
+{% endif %}
 
 <hr>
 {%  get_comment_list for bbs_obj as comment_list %}
