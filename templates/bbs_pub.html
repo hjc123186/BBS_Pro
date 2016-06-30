@@ -4,6 +4,8 @@
 <div>
     <form method="POST" action="/bbs_sub/">
         {% csrf_token %}
+        {{ form }}
+
         <script src="/static/tinymce/js/tinymce/tinymce.min.js"></script>
         <script type="text/javascript" src="/static/tinymce/js/tinymce/jquery.tinymce.min.js"></script>
         <script>tinymce.init({ selector:'textarea' });</script>

@@ -6,6 +6,7 @@ from django.views.decorators.csrf import csrf_exempt
 from django.contrib.auth import authenticate,login,logout
 from django.contrib.auth.decorators import login_required
 import django_comments
+from forms import   BBS_sub_form
 
 @login_required()
 @csrf_exempt
@@ -64,17 +65,23 @@ def sub_comment(request):
 
 @login_required()
 def bbs_pub(request):
-    return render_to_response('bbs_pub.html',{'user':request.user,})
+    form = BBS_sub_form()
+    return render_to_response('bbs_pub.html' , {'user':request.user,'form':form})
 
 @login_required()
 @csrf_exempt
 def bbs_sub(request):
-    print ',===>',request.POST.get('content')
     content = request.POST.get('content')
     author = models.BBS_user.objects.get(user__username=request.user)
+    title = request.POST.get('title')
+    category = request.POST.get('category')
+    summary = request.POST.get('summary')
+    # print ',===>',request.POST.get('category')
+
     models.BBS.objects.create(
-        title = 'TEST TITLE',
-        summary = "HAHA",
+        category = models.Category.objects.get(id=category),
+        title = title,
+        summary = summary,
         content = content,
         author = author,
         view_count = 1,
