@@ -14,7 +14,7 @@ class LoginForm(forms.Form):
     )
     password = forms.CharField(
         required=True,
-        label='密码',
+        label='密 码',
         error_messages={'required':"密码不能为空"},
         widget=forms.PasswordInput(
             attrs={
@@ -25,7 +25,7 @@ class LoginForm(forms.Form):
 
     # def clean(self):
     #     if not self.is_valid():
-    #         raise forms.ValidationError("�û������벻��Ϊ��")
+    #         raise forms.ValidationError("错误")
     #     else:
     #         cleaned_data = super(LoginForm,self).clean()
 

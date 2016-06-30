@@ -39,10 +39,10 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'django.contrib.sites',
     'django_comments',
+    'bootstrap_toolkit',
     'app01',
     'login',
     # 'django_admin_bootstrapped',
-
 ]
 
 MIDDLEWARE_CLASSES = [
