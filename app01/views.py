@@ -1,3 +1,4 @@
+#-*- coding:utf8 -*-
 from django.shortcuts import render,render_to_response
 from django.http import HttpResponse,HttpResponseRedirect
 import  models
@@ -71,24 +72,29 @@ def bbs_pub(request):
 @login_required()
 @csrf_exempt
 def bbs_sub(request):
-    content = request.POST.get('content')
-    author = models.BBS_user.objects.get(user__username=request.user)
-    title = request.POST.get('title')
-    category = request.POST.get('category')
-    summary = request.POST.get('summary')
-    # print ',===>',request.POST.get('category')
-
-    models.BBS.objects.create(
-        category = models.Category.objects.get(id=category),
-        title = title,
-        summary = summary,
-        content = content,
-        author = author,
-        view_count = 1,
-        ranking = 1,
-    )
-    return HttpResponse("yes.")
-
+    if request.method == "POST":
+        form = BBS_sub_form(request.POST)
+        if form.is_valid():
+            content = request.POST.get('content')
+            author = models.BBS_user.objects.get(user__username=request.user)
+            title = request.POST.get('title')
+            category = request.POST.get('category')
+            summary = request.POST.get('summary')
+            # print ',===>',request.POST.get('category')
+            bbs = models.BBS.objects.create(
+                category = models.Category.objects.get(id=category),
+                title = title,
+                summary = summary,
+                content = content,
+                author = author,
+                view_count = 1,
+                ranking = 1,
+            )
+            # return render_to_response('bbs_pub.html' , {'user':request.user,'form':form})
+            return HttpResponseRedirect('/detail/%s' % bbs.id)
+    else:
+            form = BBS_sub_form()
+    return render_to_response('bbs_pub.html' , {'user':request.user,'form':form})
 # @csrf_exempt
 # def login_view(request):
 #     # print '--->:',request.POST

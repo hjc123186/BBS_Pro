@@ -1,6 +1,9 @@
-#-*- coding:utf8 -*-
+#-*-coding:utf8-*-
 from django import forms
 from models import Category
+import sys
+reload(sys)
+sys.setdefaultencoding( "utf-8" )
 
 class BBS_sub_form(forms.Form ):
     category = forms.ModelChoiceField(

@@ -13,16 +13,16 @@
 
 <h3> {{ bbs_obj.title }} </h3>
 <br>
-
+<hr>
 {{ bbs_obj.content|safe }}
 <br>
-
+<hr>
+发表时间：{{ bbs_obj.created_at }}
 <div>
     {%  get_comment_count for bbs_obj as comment_count %}
     <span class="glyphicon glyphicon-comment">
         {{ comment_count }}
     </span>
-
 </div>
 
 <br>

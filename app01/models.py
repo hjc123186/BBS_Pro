@@ -10,8 +10,8 @@ class BBS(models.Model):
     author = models.ForeignKey('BBS_user')
     view_count = models.IntegerField()
     ranking = models.IntegerField()
-    created_at = models.DateField(auto_now_add=True)
-    updatad_at = models.DateField(auto_now_add=True)
+    created_at = models.DateTimeField(auto_now_add=True)
+    updatad_at = models.DateTimeField(auto_now_add=True)
 
     def __unicode__(self):
         return self.title
