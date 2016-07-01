@@ -39,14 +39,16 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'django.contrib.sites',
     'django_comments',
+    # 'pagination',
     'bootstrap_toolkit',
     'app01',
     'login',
+
     # 'django_admin_bootstrapped',
 ]
 
 MIDDLEWARE_CLASSES = [
-    # 'django.middleware.csrf.CsrfViewMiddleware',
+    'pagination.middleware.PaginationMiddleware',
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
@@ -55,6 +57,7 @@ MIDDLEWARE_CLASSES = [
     'django.contrib.auth.middleware.SessionAuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+
 ]
 
 ROOT_URLCONF = 'BBS_Pro.urls'
@@ -70,6 +73,15 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
+
+                # 'django.contrib.auth.context_processors.auth',
+                'django.core.context_processors.debug',
+                'django.core.context_processors.i18n',
+                'django.core.context_processors.media',
+                'django.core.context_processors.static',
+                'django.core.context_processors.tz',
+                # 'django.contrib.messages.context_processors.messages',
+                'django.core.context_processors.request',
             ],
         },
     },
@@ -77,6 +89,24 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'BBS_Pro.wsgi.application'
 
+# TEMPLATE_CONTEXT_PROCESSORS = (
+#         "django.core.context_processors.auth",
+#         "django.core.context_processors.debug",
+#         "django.core.context_processors.i18n",
+#         "django.core.context_processors.media",
+#         "django.core.context_processors.request",
+#     )
+
+# TEMPLATE_CONTEXT_PROCESSORS = (
+#     'django.contrib.auth.context_processors.auth',
+#     'django.core.context_processors.debug',
+#     'django.core.context_processors.i18n',
+#     'django.core.context_processors.media',
+#     'django.core.context_processors.static',
+#     'django.core.context_processors.tz',
+#     'django.contrib.messages.context_processors.messages',
+#     'django.core.context_processors.request',
+# )
 
 # Database
 # https://docs.djangoproject.com/en/1.9/ref/settings/#databases
@@ -112,7 +142,7 @@ AUTH_PASSWORD_VALIDATORS = [
 # https://docs.djangoproject.com/en/1.9/topics/i18n/
 
 # LANGUAGE_CODE = 'en-us'
-LANGUAGE_CODE = 'zh-cn'
+LANGUAGE_CODE = 'zh-hans'
 
 
 TIME_ZONE = 'Asia/Shanghai'

@@ -8,28 +8,40 @@ from django.contrib.auth import authenticate,login,logout
 from django.contrib.auth.decorators import login_required
 import django_comments
 from forms import   BBS_sub_form
+from django.core.paginator import Paginator,EmptyPage,PageNotAnInteger
 
 @login_required()
 @csrf_exempt
 def index(request):
-    bbs_list = models.BBS.objects.all()
+    bbs_list = models.BBS.objects.all().order_by("-id")
     bbs_categories = models.Category.objects.all()
+    paginator = Paginator(bbs_list,10)
+    page = request.GET.get('page')
+    try:
+        bbs = paginator.page(page)
+    except PageNotAnInteger:
+        bbs = paginator.page(1)
+    except EmptyPage:
+        bbs = paginator.page(paginator.num_pages)
+
     return render_to_response('index.html',{
-        'bbs_list':bbs_list,
+        'bbs_list':bbs,
         'user':request.user,
         'bbs_categories':bbs_categories,
     })
 
 @login_required()
 def category(request,cate_id):
-    bbs_list = models.BBS.objects.filter(category__id=cate_id)
+    bbs_list = models.BBS.objects.filter(category__id=cate_id).order_by('-id')
     bbs_categories = models.Category.objects.all()
     return render_to_response('index.html',{
         'bbs_list':bbs_list,
         'user':request.user,
         'bbs_categories':bbs_categories,
         'cate_id':int(cate_id),
-    })
+    },
+    context_instance=RequestContext(request)
+                              )
 
 @login_required()
 def bbs_detail(request,bbs_id):

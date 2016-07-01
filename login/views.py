@@ -23,10 +23,10 @@ def login_view(request):
             user = authenticate(username=username,password=password)
             if user is not None and user.is_active:
                 login(request,user)
-                return HttpResponseRedirect('/index.html')
-                # next = request.POST.get('next')
+                # return HttpResponseRedirect('/index.html')
+                next = request.GET.get('next')
                 # print "+++>" , next
-                # return HttpResponseRedirect('%s' % next)
+                return HttpResponseRedirect('%s' % next)
             else:
                 errors = "用户或密码错误"
             #     return render_to_response('login/login.html',{'form':form})
